@@ -32,6 +32,12 @@
       <li class="nav-item">
         <a class="nav-link" href="/logout">Logout</a>
       </li>
+      
+      <li>
+      	<form action="/search">
+      		<input type="text" name="pokemon" />
+      	</form>
+      </li>
     </ul>
   </div>
 </nav>
