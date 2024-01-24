@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
-import com.coreym.pokemon.models.LoginUser;
-import com.coreym.pokemon.models.User;
+import com.coreym.pokemon.models.auth.LoginUser;
+import com.coreym.pokemon.models.auth.User;
 import com.coreym.pokemon.repositories.UserRepository;
 
 @Service

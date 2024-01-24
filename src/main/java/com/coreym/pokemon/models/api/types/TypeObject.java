@@ -1,4 +1,4 @@
-package com.coreym.pokemon.models;
+package com.coreym.pokemon.models.api.types;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.coreym.pokemon.models.LoginUser;
-import com.coreym.pokemon.models.User;
+import com.coreym.pokemon.models.auth.LoginUser;
+import com.coreym.pokemon.models.auth.User;
 import com.coreym.pokemon.services.UserService;
 
 import jakarta.servlet.http.HttpSession;

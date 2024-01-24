@@ -3,7 +3,7 @@ package com.coreym.pokemon.repositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.coreym.pokemon.models.User;
+import com.coreym.pokemon.models.auth.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {

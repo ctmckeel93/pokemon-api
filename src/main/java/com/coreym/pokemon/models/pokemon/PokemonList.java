@@ -1,4 +1,4 @@
-package com.coreym.pokemon.models;
+package com.coreym.pokemon.models.pokemon;
 
 import java.util.ArrayList;
 
@@ -7,15 +7,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PokemonList {
 	
 	@JsonProperty("results")
-	private ArrayList<Pokemon> list;
+	private ArrayList<SimplePokemonData> list;
 	
 	public PokemonList() {}
 
-	public ArrayList<Pokemon> getList() {
+	public ArrayList<SimplePokemonData> getList() {
 		return list;
 	}
 
-	public void setList(ArrayList<Pokemon> list) {
+	public void setList(ArrayList<SimplePokemonData> list) {
 		this.list = list;
 	}
 	

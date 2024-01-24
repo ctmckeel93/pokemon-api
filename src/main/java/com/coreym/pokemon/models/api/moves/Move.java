@@ -1,6 +1,6 @@
-package com.coreym.pokemon.models;
+package com.coreym.pokemon.models.api.moves;
 
-public class TypeInfo {
+public class Move {
 	
 	private String name;
 
@@ -11,7 +11,6 @@ public class TypeInfo {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 
+	
 }
