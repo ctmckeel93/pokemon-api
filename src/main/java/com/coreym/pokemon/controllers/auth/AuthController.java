@@ -1,4 +1,4 @@
-package com.coreym.pokemon.controllers;
+package com.coreym.pokemon.controllers.auth;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;

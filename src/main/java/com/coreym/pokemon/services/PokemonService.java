@@ -22,4 +22,8 @@ public class PokemonService {
 		pokemon.setStatBlock();
 		return pokeRepo.save(pokemon);
 	}
+	
+	public Pokemon find(Long id) {
+		return pokeRepo.findById(id).orElse(null);
+	}
 }

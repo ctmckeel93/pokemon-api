@@ -1,5 +1,8 @@
 package com.coreym.pokemon.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,6 +10,7 @@ import org.springframework.validation.BindingResult;
 
 import com.coreym.pokemon.models.auth.LoginUser;
 import com.coreym.pokemon.models.auth.User;
+import com.coreym.pokemon.models.pokemon.Pokemon;
 import com.coreym.pokemon.repositories.UserRepository;
 
 @Service
@@ -60,5 +64,6 @@ public class UserService {
 		return userOrNull;
 		
 	}
+	
 }
 

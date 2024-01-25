@@ -1,4 +1,4 @@
-package com.coreym.pokemon.controllers;
+package com.coreym.pokemon.controllers.api;
 
 
 import java.time.Duration;
@@ -59,14 +59,14 @@ public class ApiController {
 
 	}
 	
-	public Mono<Pokemon> getPokemon(String pokemonName) {
+	public Pokemon getPokemon(String pokemonName) {
 		
-		Mono<Pokemon> response = client.get()
+		Pokemon response = client.get()
 				.uri(API + "pokemon/" + pokemonName)
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
-				.bodyToMono(Pokemon.class);
-		
+				.bodyToMono(Pokemon.class)
+				.block();
 		return response;
 				
 		
@@ -74,33 +74,33 @@ public class ApiController {
 	
 	}
 	
-	public ArrayList<Mono<Pokemon>> handleConcurrency(PokemonList pokemon) {
-		
-		ArrayList<Mono<Pokemon>> allPokemon = new ArrayList<>();
-	    Flux.fromIterable(pokemon.getList())
-	        .flatMap(item -> {
-	            if (item instanceof SimplePokemonData) {
-	                // Return the Mono instance
-	                return client.get()
-	                        .uri(API + "/pokemon/" + ((SimplePokemonData) item).getName())
-	                        .retrieve()
-	                        .bodyToMono(SimplePokemonData.class);
-	            } else {
-	                // Handle the case where the item is not an instance of SimplePokemonData
-	                return Mono.empty(); // Returning an empty Mono as a placeholder
-	            }
-	        }, 10)
-	        .subscribe(response -> {
-	            if (response instanceof SimplePokemonData) {
-	                SimplePokemonData simplePokemonDataResponse = (SimplePokemonData) response;
-	                Mono<Pokemon> pokeData = this.getPokemon(simplePokemonDataResponse.getName());
-	                allPokemon.add(pokeData);
-	                
-	                
-	            } else {
-	                System.out.println("Couldn't get a pokemon");
-	            }
-	        });
-	    	return allPokemon;
-	}
+//	public ArrayList<Mono<Pokemon>> handleConcurrency(PokemonList pokemon) {
+//		
+//		ArrayList<Mono<Pokemon>> allPokemon = new ArrayList<>();
+//	    Flux.fromIterable(pokemon.getList())
+//	        .flatMap(item -> {
+//	            if (item instanceof SimplePokemonData) {
+//	                // Return the Mono instance
+//	                return client.get()
+//	                        .uri(API + "/pokemon/" + ((SimplePokemonData) item).getName())
+//	                        .retrieve()
+//	                        .bodyToMono(SimplePokemonData.class);
+//	            } else {
+//	                // Handle the case where the item is not an instance of SimplePokemonData
+//	                return Mono.empty(); // Returning an empty Mono as a placeholder
+//	            }
+//	        }, 10)
+//	        .subscribe(response -> {
+//	            if (response instanceof SimplePokemonData) {
+//	                SimplePokemonData simplePokemonDataResponse = (SimplePokemonData) response;
+//	                Mono<Pokemon> pokeData = this.getPokemon(simplePokemonDataResponse.getName());
+//	                allPokemon.add(pokeData);
+//	                
+//	                
+//	            } else {
+//	                System.out.println("Couldn't get a pokemon");
+//	            }
+//	        });
+//	    	return allPokemon;
+//	}
 }

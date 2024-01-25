@@ -2,7 +2,6 @@ package com.coreym.pokemon.models.pokemon;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,13 +9,16 @@ import com.coreym.pokemon.models.api.images.PokemonImagesList;
 import com.coreym.pokemon.models.api.moves.MoveObject;
 import com.coreym.pokemon.models.api.stats.PokemonStat;
 import com.coreym.pokemon.models.api.types.TypeObject;
+import com.coreym.pokemon.models.auth.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -42,6 +44,14 @@ public class Pokemon {
 	private Double specialDefense;
 
 	private Double speed;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="users_pokemon",
+			joinColumns=@JoinColumn(name="pokemon_id"),
+			inverseJoinColumns=@JoinColumn(name="user_id")
+			)
+	private List<User> ownedBy;
 
 	@Transient
 	@JsonProperty("types")
@@ -184,6 +194,16 @@ public class Pokemon {
 
 	public void setSpeed(Double speed) {
 		this.speed = speed;
+	}
+	
+	
+
+	public List<User> getOwnedBy() {
+		return ownedBy;
+	}
+
+	public void setOwnedBy(List<User> ownedBy) {
+		this.ownedBy = ownedBy;
 	}
 
 	public void setStatBlock() {

@@ -1,14 +1,21 @@
 package com.coreym.pokemon.models.auth;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.coreym.pokemon.models.pokemon.Pokemon;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -54,6 +61,14 @@ public class User {
 	private Date createdAt;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="users_pokemon",
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="pokemon_id")
+			)
+	private List<Pokemon> myPokemon;
 	
 	public User() {}
 	
@@ -151,6 +166,17 @@ public class User {
 
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	
+	
+	public List<Pokemon> getMyPokemon() {
+		return myPokemon;
+	}
+
+
+
+	public void setMyPokemon(List<Pokemon> myPokemon) {
+		this.myPokemon = myPokemon;
 	}
 
 
